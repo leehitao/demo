@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <properties>
+        <property name="LOG_HOME">logs</property>
+        <property name="FILE_NAME">bzj</property>
+    </properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+        </Console>
+
+        <RollingRandomAccessFile name="RollingRandomAccessFile" fileName="${LOG_HOME}/${FILE_NAME}.log" filePattern="${LOG_HOME}/$${date:yyyy-MM}/${FILE_NAME}-%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <Policies>
+                <!--此标签配合上面filePattern的时间使用,1为按每个{yyyy-MM-dd}做切割-->
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <!--          <SizeBasedTriggeringPolicy size="10 MB"/>-->
+            </Policies>
+            <!--         <DefaultRolloverStrategy max="20"/>-->
+        </RollingRandomAccessFile>
+
+        <Async name="AsyncAppender">
+            <AppenderRef ref="RollingRandomAccessFile"/>
+        </Async>
+    </Appenders>
+
+    <Loggers>
+        <!--指定项目日志为debug等级（需要输出sql日志），root为info等级,避免输出过多spring的debug日志-->
+        <logger name="com.xrt.bzj" level="debug">
+        </logger>
+        <Root level="info">
+            <!--系统日志-->
+            <AppenderRef ref="Console"/>
+            <!--写入文件的日志-->
+            <AppenderRef ref="AsyncAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>
