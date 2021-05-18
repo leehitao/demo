@@ -1,4 +1,4 @@
-package com.xrt.bzj.dao.core;
+package com.xrt.bzj.common.base;
 
 
 import org.slf4j.Logger;

@@ -1,6 +1,6 @@
 package com.xrt.bzj.web.config.global;
 
-import com.xrt.bzj.dao.core.BizException;
+import com.xrt.bzj.common.base.BizException;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

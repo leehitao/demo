@@ -1,8 +1,8 @@
 package com.xrt.bzj.web.config.global;
 
 
-import com.xrt.bzj.dao.core.BizException;
-import com.xrt.bzj.dao.core.ResultBase;
+import com.xrt.bzj.common.base.BizException;
+import com.xrt.bzj.common.base.ResultBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;

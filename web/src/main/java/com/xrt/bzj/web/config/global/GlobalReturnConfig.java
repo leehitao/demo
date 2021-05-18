@@ -7,7 +7,7 @@ package com.xrt.bzj.web.config.global;
  */
 
 import com.alibaba.fastjson.JSON;
-import com.xrt.bzj.dao.core.ResultBase;
+import com.xrt.bzj.common.base.ResultBase;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;

@@ -1,4 +1,4 @@
-package com.xrt.bzj.dao.core;
+package com.xrt.bzj.common.base;
 
 /**
  * Created by eric on 2018/12/13.
