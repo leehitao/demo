@@ -15,6 +15,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
         <fast-json-version>1.2.31</fast-json-version>
+        <poi.version>3.17</poi.version>
     </properties>
 
     <modules>

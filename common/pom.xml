@@ -29,6 +29,11 @@
             <artifactId>fastjson</artifactId>
             <version>${fast-json-version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
     </dependencies>
 
-</project>
+        </project>
