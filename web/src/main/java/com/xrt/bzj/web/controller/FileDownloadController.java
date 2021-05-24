@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * @author Lee
@@ -26,16 +27,22 @@ public class FileDownloadController {
     @RequestMapping("userinfo")
     public void downloadUserInfo(HttpServletResponse response, @RequestBody String strJson){
         JSONObject jsonObject = JSONObject.parseObject(strJson);
-        Integer type = jsonObject.getInteger("type");
-        fileDownloadService.downloadUserInfo(response,type);
+        fileDownloadService.downloadUserInfo(response);
     }
 
 
     @RequestMapping("userinfoMix")
     public void downloadUserInfoMix(HttpServletResponse response, @RequestBody String strJson){
         JSONObject jsonObject = JSONObject.parseObject(strJson);
-        Integer type = jsonObject.getInteger("type");
-        fileDownloadService.downloadUserInfoMix(response,type);
+        fileDownloadService.downloadUserInfoMix(response);
+
+    }
+
+    @RequestMapping("userinfoMixByExcutor")
+    public void downloadUserInfoByExcutor(HttpServletResponse response, @RequestBody String strJson){
+        JSONObject jsonObject = JSONObject.parseObject(strJson);
+        fileDownloadService.downloadUserInfoMixByExcutor(response);
+
     }
 
 

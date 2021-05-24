@@ -13,6 +13,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.UUID;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.zip.ZipOutputStream;
 
 /**
@@ -30,9 +32,12 @@ public class FileDownloadServiceImpl implements FileDownloadService {
     @Autowired
     UserInfoDownHandle userInfoDownHandle;
 
+    @Autowired
+    ThreadPoolExecutor executor;
+
     @Override
-    public void downloadUserInfo(HttpServletResponse response, Integer type) {
-        String filePath = "D:\\temp"+ File.separator+ UUID.randomUUID();
+    public void downloadUserInfo(HttpServletResponse response) {
+        String filePath = "D:\\temp" + File.separator + UUID.randomUUID();
         File dir = new File(filePath);
         dir.mkdir();
         HSSFWorkbook wk = userInfoDownHandle.createUserWorkBook(filePath);
@@ -53,18 +58,19 @@ public class FileDownloadServiceImpl implements FileDownloadService {
     }
 
     @Override
-    public void downloadUserInfoMix(HttpServletResponse response, Integer type) {
-        String filePath = "D:\\temp"+ File.separator+ UUID.randomUUID();
+    public void downloadUserInfoMix(HttpServletResponse response) {
+        String filePath = "D:\\temp" + File.separator + UUID.randomUUID();
         File dir = new File(filePath);
         dir.mkdir();
         Thread[] threads = new Thread[5];
         for (int i = 0; i < threads.length; i++) {
-            threads[i] = new Thread(()->{
+            threads[i] = new Thread(() -> {
                 userInfoDownHandle.createUserWorkBook(filePath);
-                System.out.println(Thread.currentThread().getName()+"输出完毕");
-            },"thread" +i);
+                System.out.println(Thread.currentThread().getName() + "输出完毕");
+            }, "thread" + i);
             threads[i].start();
         }
+
         for (int i = 0; i < threads.length; i++) {
             try {
                 threads[i].join();
@@ -92,11 +98,59 @@ public class FileDownloadServiceImpl implements FileDownloadService {
             logger.error("压缩失败",e);
         }finally {
             try {
-                if (null!=zipOutputStream) {
+                if (null != zipOutputStream) {
                     zipOutputStream.close();
                 }
             } catch (IOException e) {
-                logger.error("压缩关流失败",e);
+                logger.error("压缩关流失败", e);
+            }
+        }
+
+    }
+
+    @Override
+    public void downloadUserInfoMixByExcutor(HttpServletResponse response) {
+        String filePath = "D:\\temp" + File.separator + UUID.randomUUID();
+        CountDownLatch countDownLatch = new CountDownLatch(5);
+        File dir = new File(filePath);
+        dir.mkdir();
+        for (int i = 0; i < 5; i++) {
+            executor.submit(new Thread(() -> {
+                userInfoDownHandle.createUserWorkBook(filePath);
+                System.out.println(Thread.currentThread().getName() + "输出完毕");
+                countDownLatch.countDown();
+            }, "thread" + i));
+        }
+        try {
+            countDownLatch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("===全都完成了===");
+        ZipOutputStream zipOutputStream = null;
+        response.setContentType("APPLICATION/OCTET-STREAM");
+        try {
+            String zipName = "excelfiles_" + System.currentTimeMillis() + ".zip";
+            response.setHeader("Content-Disposition", "attachment; filename=" + new String(zipName.getBytes("GBK"), "ISO-8859-1"));
+        } catch (UnsupportedEncodingException e2) {
+            e2.printStackTrace();
+        }
+        try {
+            zipOutputStream = new ZipOutputStream(response.getOutputStream());
+            File[] listFiles = dir.listFiles();
+            for (int i = 0; i < listFiles.length; i++) {
+                ZipUtils.doCompress(listFiles[i], zipOutputStream);
+                response.flushBuffer();
+            }
+        } catch (IOException e) {
+            logger.error("压缩失败", e);
+        } finally {
+            try {
+                if (null != zipOutputStream) {
+                    zipOutputStream.close();
+                }
+            } catch (IOException e) {
+                logger.error("压缩关流失败", e);
             }
         }
 

@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 public interface FileDownloadService {
 
-    void downloadUserInfo(HttpServletResponse response, Integer type);
+    void downloadUserInfo(HttpServletResponse response);
 
-    void downloadUserInfoMix(HttpServletResponse response, Integer type);
+    void downloadUserInfoMix(HttpServletResponse response);
+
+    void downloadUserInfoMixByExcutor(HttpServletResponse response);
+
 }
