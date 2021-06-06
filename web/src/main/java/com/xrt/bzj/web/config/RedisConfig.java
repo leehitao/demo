@@ -3,6 +3,8 @@ package com.xrt.bzj.web.config;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -12,8 +14,11 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 @Configuration
 public class RedisConfig {
 
+    protected Logger logger = LoggerFactory.getLogger(getClass());
+
     @Bean
     public RedisTemplate redisTemplate(RedisConnectionFactory factory) {
+        logger.info("start redis init");
         RedisTemplate<String, Object> template = new RedisTemplate();
         template.setConnectionFactory(factory);
         Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);

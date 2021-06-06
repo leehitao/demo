@@ -24,8 +24,8 @@ class BzjWebApplicationTests {
 
     @Test
     void fun(){
-        redisTemplate.opsForValue().set("aaaa", "你好水1234");
-        String aaaa = (String)redisTemplate.opsForValue().get("aaaa");
+        redisTemplate.opsForValue().set("Hi", "girl");
+        String aaaa = (String)redisTemplate.opsForValue().get("Hi");
         System.out.println(String.valueOf(aaaa));
 
     }

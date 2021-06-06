@@ -6,15 +6,16 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.zip.ZipOutputStream;
 
 /**
@@ -32,8 +33,8 @@ public class FileDownloadServiceImpl implements FileDownloadService {
     @Autowired
     UserInfoDownHandle userInfoDownHandle;
 
-    @Autowired
-    ThreadPoolExecutor executor;
+    @Resource(name ="serviceExecutor")
+    ThreadPoolTaskExecutor asyncServiceExecutor;
 
     @Override
     public void downloadUserInfo(HttpServletResponse response) {
@@ -115,7 +116,7 @@ public class FileDownloadServiceImpl implements FileDownloadService {
         File dir = new File(filePath);
         dir.mkdir();
         for (int i = 0; i < 5; i++) {
-            executor.submit(new Thread(() -> {
+            asyncServiceExecutor.submit(new Thread(() -> {
                 userInfoDownHandle.createUserWorkBook(filePath);
                 System.out.println(Thread.currentThread().getName() + "输出完毕");
                 countDownLatch.countDown();

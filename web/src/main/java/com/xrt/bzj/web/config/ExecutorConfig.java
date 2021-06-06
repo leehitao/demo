@@ -16,16 +16,16 @@ public class ExecutorConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(ExecutorConfig.class);
 
-    @Bean
+    @Bean("serviceExecutor")
     public Executor asyncServiceExecutor() {
         logger.info("start asyncServiceExecutor");
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         //配置核心线程数
         executor.setCorePoolSize(10);
         //配置最大线程数
-        executor.setMaxPoolSize(10);
+        executor.setMaxPoolSize(20);
         //配置队列大小
-        executor.setQueueCapacity(99999);
+        executor.setQueueCapacity(100);
         //配置线程池中的线程的名称前缀
         executor.setThreadNamePrefix("Thread-");
 
@@ -34,6 +34,7 @@ public class ExecutorConfig {
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
         //执行初始化
         executor.initialize();
+
         return executor;
     }
 }
