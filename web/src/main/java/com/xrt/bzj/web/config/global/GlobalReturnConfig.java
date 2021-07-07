@@ -7,7 +7,7 @@ package com.xrt.bzj.web.config.global;
  */
 
 import com.alibaba.fastjson.JSON;
-import com.xrt.bzj.common.base.ResultBase;
+import com.xrt.bzj.common.base.ResultVo;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -39,7 +39,7 @@ public class GlobalReturnConfig {
 
 		@Override
 		public Object beforeBodyWrite(Object body, MethodParameter methodParameter, MediaType mediaType, Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
-			if (body instanceof ResultBase) {
+			if (body instanceof ResultVo) {
 				return body;
 			}
 			// 内容为空返回默认消息
@@ -51,9 +51,9 @@ public class GlobalReturnConfig {
 			}
 			// 单独返回字符串需要特殊处理
 			if (body instanceof String) {
-				return JSON.toJSONString(new ResultBase().success(body));
+				return JSON.toJSONString(new ResultVo().success(body));
 			}
-			return new ResultBase().success(body);
+			return new ResultVo().success(body);
 		}
 	}
 

@@ -5,8 +5,8 @@ package com.xrt.bzj.common.base;
  */
 public interface Result {
 
-    public int getCode();
+    int getCode();
 
-    public String getMessage();
+    String getMessage();
 
 }

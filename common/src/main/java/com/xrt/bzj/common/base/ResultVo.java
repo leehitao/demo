@@ -5,7 +5,7 @@ package com.xrt.bzj.common.base;
  * @Date: 2020/7/29 19:24
  * @Version 1.0
  */
-public class ResultBase<T> implements Result{
+public class ResultVo<T> implements Result{
 
 	// 需要传递的代号
 	private int code;
@@ -14,22 +14,22 @@ public class ResultBase<T> implements Result{
 	// 需要传递的数据
 	private T data;
 
-	public ResultBase() {
+	public ResultVo() {
 	}
 
-	public ResultBase(int code, String message, T data) {
+	public ResultVo(int code, String message, T data) {
 		this.code = code;
 		this.message = message;
 		this.data = data;
 	}
 
-	public ResultBase(int code, String message) {
+	public ResultVo(int code, String message) {
 		this.code = code;
 		this.message = message;
 	}
 
-	public ResultBase success(T data) {
-		return new ResultBase(200, "请求成功!", data);
+	public ResultVo success(T data) {
+		return new ResultVo(200, "success", data);
 	}
 
 	public int getCode() {

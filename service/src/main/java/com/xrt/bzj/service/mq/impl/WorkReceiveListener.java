@@ -8,8 +8,12 @@ import org.springframework.stereotype.Component;
 // 2个消费者
 @Component
 public class WorkReceiveListener {
+
+    private static int count = 0;
+
     @RabbitListener(queues = "queue_work")
     public void receiveMessage(String msg, Channel channel, Message message) {
+        
         // 只包含发送的消息
         System.out.println("1接收到消息：" + msg);
         // channel 通道信息
