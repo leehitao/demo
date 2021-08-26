@@ -26,21 +26,18 @@ public class FileDownloadController {
 
     @RequestMapping("userinfo")
     public void downloadUserInfo(HttpServletResponse response, @RequestBody String strJson){
-        JSONObject jsonObject = JSONObject.parseObject(strJson);
         fileDownloadService.downloadUserInfo(response);
     }
 
 
     @RequestMapping("userinfoMix")
     public void downloadUserInfoMix(HttpServletResponse response, @RequestBody String strJson){
-        JSONObject jsonObject = JSONObject.parseObject(strJson);
         fileDownloadService.downloadUserInfoMix(response);
 
     }
 
     @RequestMapping("userinfoMixByExcutor")
     public void downloadUserInfoByExcutor(HttpServletResponse response, @RequestBody String strJson){
-        JSONObject jsonObject = JSONObject.parseObject(strJson);
         fileDownloadService.downloadUserInfoMixByExcutor(response);
 
     }
