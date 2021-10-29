@@ -11,7 +11,7 @@ public class FileHead {
 
     String name;
 
-    String indexName;
+    String key;
 
     public String getName() {
         return name;
@@ -21,19 +21,19 @@ public class FileHead {
         this.name = name;
     }
 
-    public String getIndexName() {
-        return indexName;
+    public String getKey() {
+        return key;
     }
 
-    public void setIndexName(String indexName) {
-        this.indexName = indexName;
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public FileHead() {
     }
 
-    public FileHead(String name, String indexName) {
+    public FileHead(String name, String key) {
         this.name = name;
-        this.indexName = indexName;
+        this.key = key;
     }
 }

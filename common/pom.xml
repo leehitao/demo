@@ -34,6 +34,18 @@
             <artifactId>poi</artifactId>
             <version>${poi.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${common-lang-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <version>1.1</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>

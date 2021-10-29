@@ -1,6 +1,6 @@
 package com.xrt.bzj.service.file.impl;
 
-import com.xrt.bzj.common.excel.ExcelHelpper;
+import com.xrt.bzj.common.excel.ExcelHelper;
 import com.xrt.bzj.common.excel.FileContainer;
 import com.xrt.bzj.common.excel.FileHead;
 import com.xrt.bzj.dao.po.AverageUser;
@@ -40,7 +40,7 @@ public class UserInfoDownHandle {
         averageUserFileContainer.setHeads(headList);
         averageUserFileContainer.setFilePath(filePath);
         averageUserFileContainer.setFileName(UUID.randomUUID()+"-用户表.xls");
-        ExcelHelpper excelHelpper = new ExcelHelpper();
+        ExcelHelper excelHelpper = new ExcelHelper();
         wk = excelHelpper.fileExport(averageUserFileContainer);
         return wk;
     }

@@ -20,7 +20,7 @@ import java.util.List;
  * @package com.xrt.bzj.common.excel
  * @date 2021/5/23 17:25
  */
-public class ExcelHelpper {
+public class ExcelHelper {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -53,7 +53,7 @@ public class ExcelHelpper {
             for (FileHead head : heads) {
 
                 try {
-                    String methodName = captureName(head.getIndexName());
+                    String methodName = captureName(head.getKey());
                     methodName = "get" + methodName;
                     Method method = aClass.getDeclaredMethod(methodName, null);
                     Object value = method.invoke(o, null);

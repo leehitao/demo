@@ -1,6 +1,6 @@
 package com.xrt.bzj.service.file.impl;
 
-import com.xrt.bzj.common.util.ZipUtils;
+import com.xrt.bzj.common.util.ZipUtil;
 import com.xrt.bzj.service.file.FileDownloadService;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.slf4j.Logger;
@@ -53,7 +53,7 @@ public class FileDownloadServiceImpl implements FileDownloadService {
             try {
                 wk.close();
             } catch (IOException e) {
-                logger.error("导出用户表异常",e);
+                logger.error("导出异常",e);
             }
         }
     }
@@ -92,7 +92,7 @@ public class FileDownloadServiceImpl implements FileDownloadService {
             zipOutputStream = new ZipOutputStream(response.getOutputStream());
             File[] listFiles = dir.listFiles();
             for (int i = 0; i < listFiles.length; i++) {
-                ZipUtils.doCompress(listFiles[i], zipOutputStream);
+                ZipUtil.doCompress(listFiles[i], zipOutputStream);
                 response.flushBuffer();
             }
         } catch (IOException e) {
@@ -140,7 +140,7 @@ public class FileDownloadServiceImpl implements FileDownloadService {
             zipOutputStream = new ZipOutputStream(response.getOutputStream());
             File[] listFiles = dir.listFiles();
             for (int i = 0; i < listFiles.length; i++) {
-                ZipUtils.doCompress(listFiles[i], zipOutputStream);
+                ZipUtil.doCompress(listFiles[i], zipOutputStream);
                 response.flushBuffer();
             }
         } catch (IOException e) {

@@ -11,7 +11,7 @@ import java.util.zip.ZipOutputStream;
 /** 
 * 压缩文件工具类
 */
-public class ZipUtils {
+public class ZipUtil {
 
     public static void doCompress(String srcFile, String zipFile) throws Exception {
         doCompress(new File(srcFile), new File(zipFile));
