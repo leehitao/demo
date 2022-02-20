@@ -5,11 +5,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.ComponentScan;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @ServletComponentScan
-@ComponentScan(basePackages = {"com.xrt.bzj"})
+@ComponentScan({"com.xrt.bzj"})
 @MapperScan("com.xrt.bzj.dao.mapper")
+@EnableSwagger2
 public class BzjWebApplication {
 
     public static void main(String[] args) {

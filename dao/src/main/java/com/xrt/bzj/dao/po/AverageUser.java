@@ -1,88 +1,39 @@
 package com.xrt.bzj.dao.po;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
 
+@Data
+@ApiModel("用户信息请求参数类")
 public class AverageUser implements Serializable {
+
+    @ApiModelProperty("用户ID")
     private Integer id;
 
+    @ApiModelProperty("账号")
     private String account;
 
+    @ApiModelProperty("用户名")
     private String name;
 
+    @ApiModelProperty("密码")
     private String password;
 
+    @ApiModelProperty("盐")
     private String salt;
 
+    @ApiModelProperty("创建时间")
     private Date createDate;
 
+    @ApiModelProperty("修改时间")
     private Date updateDate;
 
+    @ApiModelProperty("用户头像")
     private String headUrl;
 
     private static final long serialVersionUID = 1L;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getAccount() {
-        return account;
-    }
-
-    public void setAccount(String account) {
-        this.account = account == null ? null : account.trim();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
-    }
-
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt == null ? null : salt.trim();
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public Date getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
-    }
-
-    public String getHeadUrl() {
-        return headUrl;
-    }
-
-    public void setHeadUrl(String headUrl) {
-        this.headUrl = headUrl == null ? null : headUrl.trim();
-    }
 }

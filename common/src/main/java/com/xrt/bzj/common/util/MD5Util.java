@@ -88,20 +88,6 @@ public class MD5Util {
 	/**
 	 * 获取签名字符串
 	 *
-	 * @param jsonStr
-	 * @param appKey
-	 * @param <T>
-	 * @return
-	 */
-	public static <T> String buildSign(String jsonStr, String keyName, String appKey, String charset) {
-		String content = getSignatureContentStr(jsonStr);
-		content += "&" + keyName + "=" + appKey;
-		return md5Hex(content,charset);
-	}
-
-	/**
-	 * 获取签名字符串
-	 *
 	 * @param <T>
 	 * @return
 	 */

@@ -1,8 +1,11 @@
 package com.xrt.bzj.service.mchuser.impl;
 
 import com.xrt.bzj.dao.mapper.AverageUserMapper;
+import com.xrt.bzj.dao.param.AverageUserParam;
 import com.xrt.bzj.dao.po.AverageUser;
+import com.xrt.bzj.dao.vo.AverageUserVo;
 import com.xrt.bzj.service.mchuser.AverageUserService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +25,11 @@ public class AverageUserServiceImpl implements AverageUserService {
     AverageUserMapper averageUserMapper;
 
     @Override
-    public AverageUser findAverageUser(AverageUser averageUser) {
-         return averageUserMapper.selectByAccount(averageUser.getAccount());
+    public AverageUserVo findAverageUser(AverageUserParam averageUserParam) {
+        AverageUser averageUser = averageUserMapper.selectByPrimaryKey(averageUserParam.getId());
+        AverageUserVo averageUserVo = new AverageUserVo();
+        BeanUtils.copyProperties(averageUser,averageUserVo);
+        return averageUserVo;
     }
 
     @Override

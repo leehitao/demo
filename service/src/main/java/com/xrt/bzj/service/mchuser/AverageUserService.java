@@ -1,6 +1,8 @@
 package com.xrt.bzj.service.mchuser;
 
+import com.xrt.bzj.dao.param.AverageUserParam;
 import com.xrt.bzj.dao.po.AverageUser;
+import com.xrt.bzj.dao.vo.AverageUserVo;
 
 import java.util.List;
 
@@ -13,7 +15,7 @@ import java.util.List;
  */
 public interface AverageUserService {
 
-    AverageUser findAverageUser(AverageUser averageUser);
+    AverageUserVo findAverageUser(AverageUserParam averageUser);
 
     List<AverageUser> findAllAverageUser();
 
