@@ -1,5 +1,6 @@
 package com.xrt.bzj.dao.po;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -26,6 +27,10 @@ public class AverageUser implements Serializable {
 
     @ApiModelProperty("盐")
     private String salt;
+
+    @ApiModelProperty("出生日期")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    private Date birthday;
 
     @ApiModelProperty("创建时间")
     private Date createDate;

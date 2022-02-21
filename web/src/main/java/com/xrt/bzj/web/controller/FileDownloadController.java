@@ -1,9 +1,13 @@
 package com.xrt.bzj.web.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.xrt.bzj.dao.vo.AverageUserVo;
 import com.xrt.bzj.service.file.FileDownloadService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -19,25 +23,29 @@ import java.util.concurrent.ThreadPoolExecutor;
  */
 @Controller
 @RequestMapping("/download")
+@Api(value = "API", tags = {"文件下载API"})
 public class FileDownloadController {
 
     @Autowired
     FileDownloadService fileDownloadService;
 
-    @RequestMapping("userinfo")
-    public void downloadUserInfo(HttpServletResponse response, @RequestBody String strJson){
+    @GetMapping("userinfo")
+    @ApiOperation(value = "用户资料下载")
+    public void downloadUserInfo(HttpServletResponse response){
         fileDownloadService.downloadUserInfo(response);
     }
 
 
     @RequestMapping("userinfoMix")
-    public void downloadUserInfoMix(HttpServletResponse response, @RequestBody String strJson){
+    @ApiOperation(value = "合并下载")
+    public void downloadUserInfoMix(HttpServletResponse response){
         fileDownloadService.downloadUserInfoMix(response);
 
     }
 
     @RequestMapping("userinfoMixByExcutor")
-    public void downloadUserInfoByExcutor(HttpServletResponse response, @RequestBody String strJson){
+    @ApiOperation(value = "合并下载-线程池")
+    public void downloadUserInfoByExcutor(HttpServletResponse response){
         fileDownloadService.downloadUserInfoMixByExcutor(response);
 
     }

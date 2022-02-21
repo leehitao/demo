@@ -1,5 +1,6 @@
 package com.xrt.bzj.web.config;
 
+import com.google.common.base.Predicates;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -24,9 +25,8 @@ public class SwaggerConfig  extends WebMvcConfigurationSupport {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))                      //这里采用包含注解的方式来确定要显示的接口
-                //.apis(RequestHandlerSelectors.basePackage("com.moerlong.service_authorize.controller"))    //这里采用包扫描的方式来确定要显示的接口
-                .paths(PathSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage("com.xrt.bzj"))    //这里采用包扫描的方式来确定要显示的接口
+                .paths(Predicates.not(PathSelectors.regex("/error.*")))
                 .build();
     }
 

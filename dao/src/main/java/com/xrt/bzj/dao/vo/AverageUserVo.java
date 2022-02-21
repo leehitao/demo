@@ -1,8 +1,11 @@
 package com.xrt.bzj.dao.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import java.util.Date;
 
 /**
  * @author Lee
@@ -27,6 +30,10 @@ public class AverageUserVo {
 
     @ApiModelProperty("用户头像")
     private String headUrl;
+
+    @ApiModelProperty("出生日期")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    private Date birthday;
 
 
 }
