@@ -1,5 +1,6 @@
 package com.xrt.bzj.service.mchuser.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.xrt.bzj.dao.mapper.AverageUserMapper;
 import com.xrt.bzj.dao.param.AverageUserParam;
 import com.xrt.bzj.dao.po.AverageUser;
@@ -26,7 +27,7 @@ public class AverageUserServiceImpl implements AverageUserService {
 
     @Override
     public AverageUserVo findAverageUser(AverageUserParam averageUserParam) {
-        AverageUser averageUser = averageUserMapper.selectByPrimaryKey(averageUserParam.getId());
+        AverageUser averageUser = averageUserMapper.selectById(averageUserParam.getId());
         AverageUserVo averageUserVo = new AverageUserVo();
         BeanUtils.copyProperties(averageUser,averageUserVo);
         return averageUserVo;
@@ -34,6 +35,7 @@ public class AverageUserServiceImpl implements AverageUserService {
 
     @Override
     public List<AverageUser> findAllAverageUser() {
-        return averageUserMapper.selectAllAverageUser();
+        LambdaQueryWrapper<AverageUser> wrapper = new LambdaQueryWrapper<>();
+        return averageUserMapper.selectList(wrapper);
     }
 }

@@ -1,5 +1,6 @@
 package com.xrt.bzj.dao.po;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -10,6 +11,7 @@ import java.util.Date;
 
 @Data
 @ApiModel("用户信息请求参数类")
+@TableName("t_average_user")
 public class AverageUser implements Serializable {
     private static final long serialVersionUID = 1L;
 

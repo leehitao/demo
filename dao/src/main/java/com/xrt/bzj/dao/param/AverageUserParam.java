@@ -1,7 +1,10 @@
 package com.xrt.bzj.dao.param;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
@@ -16,11 +19,10 @@ import java.io.Serializable;
 @Data
 @Accessors(chain = true)
 @ApiModel("用户信息请求参数类")
+@AllArgsConstructor
+@NoArgsConstructor
 public class AverageUserParam implements Serializable {
     private static final long serialVersionUID = 1L;
-
-    public AverageUserParam() {
-    }
 
     @ApiModelProperty("用户ID")
     private Integer id;
