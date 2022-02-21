@@ -14,7 +14,6 @@ import lombok.Data;
 @Data
 @ApiModel("用户信息类")
 public class AverageUserVo {
-
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("用户ID")

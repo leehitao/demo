@@ -28,7 +28,7 @@ public class ResultVo<T> implements Result{
 		this.message = message;
 	}
 
-	public ResultVo success(T data) {
+	public static <T> ResultVo  success(T data) {
 		return new ResultVo(200, "success", data);
 	}
 

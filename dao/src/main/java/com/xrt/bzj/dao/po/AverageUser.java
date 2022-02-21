@@ -10,6 +10,7 @@ import java.util.Date;
 @Data
 @ApiModel("用户信息请求参数类")
 public class AverageUser implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("用户ID")
     private Integer id;
@@ -35,5 +36,5 @@ public class AverageUser implements Serializable {
     @ApiModelProperty("用户头像")
     private String headUrl;
 
-    private static final long serialVersionUID = 1L;
+
 }

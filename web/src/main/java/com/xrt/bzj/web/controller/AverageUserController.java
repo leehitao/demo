@@ -17,18 +17,18 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("api/mchUser")
-@Api(tags = "用戶API")
+@Api(value = "API", tags = {"用户API"})
 public class AverageUserController {
 
     @Autowired
     private AverageUserService averageUserService;
 
     @PostMapping("findMchUser")
-    @ApiOperation(value = "查询用户接口")
+    @ApiOperation(value = "查询用户接口", response = AverageUserVo.class)
     @ResponseBody
     public ResultVo saveMchUser(HttpServletResponse response, @RequestBody AverageUserParam averageUserParam) throws Exception {
         AverageUserVo averageUserVo = averageUserService.findAverageUser(averageUserParam);
-        return new ResultVo().success(averageUserVo);
+        return ResultVo.success(averageUserVo);
     }
 
 
