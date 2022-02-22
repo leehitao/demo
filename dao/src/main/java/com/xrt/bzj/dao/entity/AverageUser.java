@@ -1,4 +1,4 @@
-package com.xrt.bzj.dao.po;
+package com.xrt.bzj.dao.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;

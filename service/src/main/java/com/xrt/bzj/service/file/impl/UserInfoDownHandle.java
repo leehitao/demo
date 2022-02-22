@@ -3,7 +3,7 @@ package com.xrt.bzj.service.file.impl;
 import com.xrt.bzj.common.excel.ExcelHelper;
 import com.xrt.bzj.common.excel.FileContainer;
 import com.xrt.bzj.common.excel.FileHead;
-import com.xrt.bzj.dao.po.AverageUser;
+import com.xrt.bzj.dao.entity.AverageUser;
 import com.xrt.bzj.service.mchuser.AverageUserService;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,8 @@ public class UserInfoDownHandle {
     AverageUserService averageUserService;
 
     public HSSFWorkbook createUserWorkBook(String filePath) {
-        HSSFWorkbook wk;List<AverageUser> list = averageUserService.findAllAverageUser();
+        HSSFWorkbook wk;
+        List<AverageUser> list = averageUserService.findAllAverageUser();
         FileContainer<AverageUser> averageUserFileContainer = new FileContainer<>();
         List<FileHead> headList = new ArrayList<>();
         headList.add(new FileHead("id","id"));

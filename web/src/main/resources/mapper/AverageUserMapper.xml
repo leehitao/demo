@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xrt.bzj.dao.mapper.AverageUserMapper" >
-  <resultMap id="BaseResultMap" type="com.xrt.bzj.dao.po.AverageUser" >
+  <resultMap id="BaseResultMap" type="com.xrt.bzj.dao.entity.AverageUser" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="account" property="account" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
@@ -36,7 +36,7 @@
     delete from t_average_user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.xrt.bzj.dao.po.AverageUser" >
+  <insert id="insert" parameterType="com.xrt.bzj.dao.entity.AverageUser" >
     insert into t_average_user (id, account, name, 
       password, salt, create_date, 
       update_date, head_url)
@@ -44,7 +44,7 @@
       #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
       #{updateDate,jdbcType=TIMESTAMP}, #{headUrl,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.xrt.bzj.dao.po.AverageUser" >
+  <insert id="insertSelective" parameterType="com.xrt.bzj.dao.entity.AverageUser" >
     insert into t_average_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -99,7 +99,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.xrt.bzj.dao.po.AverageUser" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.xrt.bzj.dao.entity.AverageUser" >
     update t_average_user
     <set >
       <if test="account != null" >
@@ -126,7 +126,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.xrt.bzj.dao.po.AverageUser" >
+  <update id="updateByPrimaryKey" parameterType="com.xrt.bzj.dao.entity.AverageUser" >
     update t_average_user
     set account = #{account,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},

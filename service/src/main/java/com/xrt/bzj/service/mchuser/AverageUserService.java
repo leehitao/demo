@@ -1,7 +1,7 @@
 package com.xrt.bzj.service.mchuser;
 
+import com.xrt.bzj.dao.entity.AverageUser;
 import com.xrt.bzj.dao.param.AverageUserParam;
-import com.xrt.bzj.dao.po.AverageUser;
 import com.xrt.bzj.dao.vo.AverageUserVo;
 
 import java.util.List;
