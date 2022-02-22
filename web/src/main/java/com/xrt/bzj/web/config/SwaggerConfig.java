@@ -1,8 +1,6 @@
 package com.xrt.bzj.web.config;
 
 import com.google.common.base.Predicates;
-import io.swagger.annotations.ApiOperation;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -17,7 +15,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
-@ConditionalOnProperty(prefix = "msg-config", name = "swagger-open", havingValue = "true")
 public class SwaggerConfig  extends WebMvcConfigurationSupport {
 
     @Bean
