@@ -6,12 +6,12 @@
     <parent>
         <groupId>com.xrt.bzj</groupId>
         <artifactId>demo</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.1</version>
     </parent>
 
     <groupId>com.xrt.bzj</groupId>
     <artifactId>dao</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>dao</name>
     <description>Demo project for Spring Boot</description>
 
@@ -20,7 +20,7 @@
         <dependency>
             <groupId>com.xrt.bzj</groupId>
             <artifactId>common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>0.0.1</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
