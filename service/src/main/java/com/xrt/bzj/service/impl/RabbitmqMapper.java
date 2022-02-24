@@ -1,4 +1,4 @@
-package com.xrt.bzj.service.mq.impl;
+package com.xrt.bzj.service.impl;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

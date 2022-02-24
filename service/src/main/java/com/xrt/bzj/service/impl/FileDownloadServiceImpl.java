@@ -1,7 +1,7 @@
-package com.xrt.bzj.service.file.impl;
+package com.xrt.bzj.service.impl;
 
 import com.xrt.bzj.common.util.ZipUtil;
-import com.xrt.bzj.service.file.FileDownloadService;
+import com.xrt.bzj.service.FileDownloadService;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

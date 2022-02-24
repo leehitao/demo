@@ -3,7 +3,7 @@ package com.xrt.bzj.web.controller;
 import com.xrt.bzj.common.base.ResultVo;
 import com.xrt.bzj.dao.param.AverageUserParam;
 import com.xrt.bzj.dao.vo.AverageUserVo;
-import com.xrt.bzj.service.mchuser.AverageUserService;
+import com.xrt.bzj.service.AverageUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

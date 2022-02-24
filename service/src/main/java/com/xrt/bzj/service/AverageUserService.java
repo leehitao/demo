@@ -1,4 +1,4 @@
-package com.xrt.bzj.service.mchuser;
+package com.xrt.bzj.service;
 
 import com.xrt.bzj.dao.entity.AverageUser;
 import com.xrt.bzj.dao.param.AverageUserParam;

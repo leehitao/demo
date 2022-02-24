@@ -1,10 +1,10 @@
-package com.xrt.bzj.service.file.impl;
+package com.xrt.bzj.service.impl;
 
 import com.xrt.bzj.common.excel.ExcelHelper;
 import com.xrt.bzj.common.excel.FileContainer;
 import com.xrt.bzj.common.excel.FileHead;
 import com.xrt.bzj.dao.entity.AverageUser;
-import com.xrt.bzj.service.mchuser.AverageUserService;
+import com.xrt.bzj.service.AverageUserService;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

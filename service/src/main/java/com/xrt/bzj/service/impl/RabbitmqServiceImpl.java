@@ -1,6 +1,6 @@
-package com.xrt.bzj.service.mq.impl;
+package com.xrt.bzj.service.impl;
 
-import com.xrt.bzj.service.mq.RabbitmqService;
+import com.xrt.bzj.service.RabbitmqService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

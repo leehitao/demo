@@ -1,4 +1,4 @@
-package com.xrt.bzj.service.mq;
+package com.xrt.bzj.service;
 
 /**
  * @author Lee

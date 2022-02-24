@@ -1,4 +1,4 @@
-package com.xrt.bzj.service.mq.impl;
+package com.xrt.bzj.service.impl;
 
 import com.rabbitmq.client.Channel;
 import org.springframework.amqp.core.Message;

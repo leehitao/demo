@@ -1,4 +1,4 @@
-package com.xrt.bzj.service.file;
+package com.xrt.bzj.service;
 
 import javax.servlet.http.HttpServletResponse;
 

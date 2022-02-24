@@ -46,9 +46,9 @@ public class SpringBootPlusGenerator {
 
         // 设置基本信息
         generatorProperties
-                .setMavenModuleName("demo")
+                .setMavenModuleName("example")
                 .setParentPackage("com.xrt.bzj")
-//                .setModuleName("UserLocation")
+                .setModuleName("example")//bzj.#{example}
                 .setAuthor("lee")
                 .setFileOverride(true);
 
@@ -62,8 +62,8 @@ public class SpringBootPlusGenerator {
                 .setDbType(DbType.MYSQL)
                 .setUsername("root")
                 .setPassword("1qaz2wsx")
-                .setDriverName("com.mysql.jdbc.Driver")
-                .setUrl("jdbc:mysql://120.77.202.213:3306/demo/construction?useUnicode=true&characterEncoding=UTF-8&useSSL=false");
+                .setDriverName("com.mysql.cj.jdbc.Driver")
+                .setUrl("jdbc:mysql://120.77.202.213:3306/demo?useUnicode=true&characterEncoding=UTF-8&useSSL=false");
 
         // 生成配置
         generatorProperties.getGeneratorConfig()

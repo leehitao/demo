@@ -1,33 +1,87 @@
 package com.xrt.bzj.web.controller;
 
-import com.xrt.bzj.common.base.Result;
-import com.xrt.bzj.common.base.ResultVo;
+
+import com.xrt.bzj.dao.entity.Order;
+import com.xrt.bzj.dao.param.OrderPageParam;
+import com.xrt.bzj.service.OrderService;
+import lombok.extern.slf4j.Slf4j;
+
+import io.geekidea.springbootplus.generator.common.controller.BaseController;
+import io.geekidea.springbootplus.generator.common.api.ApiResult;
+import io.geekidea.springbootplus.generator.core.pagination.Paging;
+
+import io.geekidea.springbootplus.generator.core.validator.groups.Add;
+import io.geekidea.springbootplus.generator.core.validator.groups.Update;
+import org.springframework.validation.annotation.Validated;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 /**
- * @author Lee
- * @version 1.0
- * @project demo
- * @package com.xrt.bzj.web.controller
- * @date 2021/7/7 22:52
+ *  控制器
+ *
+ * @author lee
+ * @since 2022-02-24
  */
+@Slf4j
+@RestController
 @RequestMapping("/order")
-@Controller
-@Api(value = "API", tags = {"订单Api"})
-public class OrderController {
+@Api(value = "API", tags = {"订单API"})
+public class OrderController extends BaseController {
 
-    @RequestMapping("submit")
-    @ResponseBody
-    @ApiOperation(value = "提交订单",response = ResultVo.class  )
-    public Result saveOrder(HttpServletRequest request, @RequestBody String order){
+    @Autowired
+    private OrderService orderService;
 
-        return new ResultVo<>();
+    /**
+     * 添加
+     */
+    @PostMapping("/add")
+    @ApiOperation(value = "添加", response = ApiResult.class)
+    public ApiResult<Boolean> addOrder(@Validated(Add.class) @RequestBody Order order) throws Exception {
+        boolean flag = orderService.saveOrder(order);
+        return ApiResult.result(flag);
     }
+
+    /**
+     * 修改
+     */
+    @PostMapping("/update")
+    @ApiOperation(value = "修改", response = ApiResult.class)
+    public ApiResult<Boolean> updateOrder(@Validated(Update.class) @RequestBody Order order) throws Exception {
+        boolean flag = orderService.updateOrder(order);
+        return ApiResult.result(flag);
+    }
+
+    /**
+     * 删除
+     */
+    @PostMapping("/delete/{id}")
+    @ApiOperation(value = "删除", response = ApiResult.class)
+    public ApiResult<Boolean> deleteOrder(@PathVariable("id") Long id) throws Exception {
+        boolean flag = orderService.deleteOrder(id);
+        return ApiResult.result(flag);
+    }
+
+    /**
+     * 获取详情
+     */
+    @GetMapping("/info/{id}")
+    @ApiOperation(value = "详情", response = Order.class)
+    public ApiResult<Order> getOrder(@PathVariable("id") Long id) throws Exception {
+        Order order = orderService.getById(id);
+        return ApiResult.ok(order);
+    }
+
+    /**
+     * 分页列表
+     */
+    @PostMapping("/getPageList")
+    @ApiOperation(value = "分页列表", response = Order.class)
+    public ApiResult<Paging<Order>> getOrderPageList(@Validated @RequestBody OrderPageParam orderPageParam) throws Exception {
+        Paging<Order> paging = orderService.getOrderPageList(orderPageParam);
+        return ApiResult.ok(paging);
+    }
+
 }
+
