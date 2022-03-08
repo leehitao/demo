@@ -53,7 +53,7 @@ public class SpringBootPlusGenerator {
                 .setFileOverride(true);
 
         // 设置表信息
-        generatorProperties.addTable("t_order", "id");
+        generatorProperties.addTable("t_product", "id");
         // 设置表前缀
         generatorProperties.setTablePrefix(Arrays.asList("t_"));
 
@@ -80,7 +80,7 @@ public class SpringBootPlusGenerator {
                 .setPageListOrder(true)
                 .setParamValidation(true)
                 .setSwaggerTags(true)
-                .setOperationLog(true);
+                .setOperationLog(false);
 
         // 全局配置
         generatorProperties.getMybatisPlusGeneratorConfig().getGlobalConfig()

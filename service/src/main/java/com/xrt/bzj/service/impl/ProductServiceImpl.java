@@ -2,10 +2,10 @@ package com.xrt.bzj.service.impl;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.xrt.bzj.dao.entity.Order;
-import com.xrt.bzj.dao.mapper.OrderMapper;
-import com.xrt.bzj.dao.param.OrderPageParam;
-import com.xrt.bzj.service.OrderService;
+import com.xrt.bzj.dao.entity.Product;
+import com.xrt.bzj.dao.mapper.ProductMapper;
+import com.xrt.bzj.dao.param.ProductPageParam;
+import com.xrt.bzj.service.ProductService;
 import io.geekidea.springbootplus.generator.common.service.impl.BaseServiceImpl;
 import io.geekidea.springbootplus.generator.core.pagination.Paging;
 import io.geekidea.springbootplus.generator.core.pagination.PageInfo;
@@ -21,43 +21,39 @@ import org.springframework.beans.factory.annotation.Autowired;
  *  服务实现类
  *
  * @author lee
- * @since 2022-02-24
+ * @since 2022-03-08
  */
 @Slf4j
 @Service
-public class OrderServiceImpl extends BaseServiceImpl<OrderMapper, Order> implements OrderService {
+public class ProductServiceImpl extends BaseServiceImpl<ProductMapper, Product> implements ProductService {
 
     @Autowired
-    private OrderMapper orderMapper;
+    private ProductMapper productMapper;
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public boolean saveOrder(Order order) throws Exception {
-
-
-
-
-        return super.save(order);
+    public boolean saveProduct(Product product) throws Exception {
+        return super.save(product);
     }
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public boolean updateOrder(Order order) throws Exception {
-        return super.updateById(order);
+    public boolean updateProduct(Product product) throws Exception {
+        return super.updateById(product);
     }
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public boolean deleteOrder(Long id) throws Exception {
+    public boolean deleteProduct(Long id) throws Exception {
         return super.removeById(id);
     }
 
     @Override
-    public Paging<Order> getOrderPageList(OrderPageParam orderPageParam) throws Exception {
-        Page<Order> page = new PageInfo<>(orderPageParam, OrderItem.desc(getLambdaColumn(Order::getCreateTime)));
-        LambdaQueryWrapper<Order> wrapper = new LambdaQueryWrapper<>();
-        IPage<Order> iPage = orderMapper.selectPage(page, wrapper);
-        return new Paging<Order>(iPage);
+    public Paging<Product> getProductPageList(ProductPageParam productPageParam) throws Exception {
+        Page<Product> page = new PageInfo<>(productPageParam);
+        LambdaQueryWrapper<Product> wrapper = new LambdaQueryWrapper<>();
+        IPage<Product> iPage = productMapper.selectPage(page, wrapper);
+        return new Paging<Product>(iPage);
     }
 
 }

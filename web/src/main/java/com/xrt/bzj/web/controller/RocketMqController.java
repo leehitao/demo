@@ -1,0 +1,45 @@
+package com.xrt.bzj.web.controller;
+
+import com.xrt.bzj.service.rocketmq.RocketMQProducer;
+import io.swagger.annotations.Api;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.rocketmq.client.producer.DefaultMQProducer;
+import org.apache.rocketmq.common.message.Message;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+/**
+ * Description：
+ */
+@Slf4j
+@RestController
+@RequestMapping("/rocket-mq")
+@Api(value = "API", tags = {"rocketMQ-API"})
+public class RocketMqController {
+
+    @Autowired
+    @Qualifier("rocketMQProducer")
+    RocketMQProducer rocketMQProducer;
+
+    @GetMapping("/test")
+    public void TestSend() {
+        DefaultMQProducer producer = rocketMQProducer.getRocketMQProducer();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String body = "hi RocketMQ, now is  " + sdf.format(new Date()) + ".";
+        Message message = new Message("topic2020", "test", body.getBytes());
+        try {
+            producer.send(message);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+}

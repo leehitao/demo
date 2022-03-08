@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/mq")
-@Api(value = "API", tags = {"消息中间件API"})
+@Api(value = "API", tags = {"rabbitMQ-API"})
 public class RabbitmqController {
     @Autowired
     private RabbitmqService rabbitmqService;
