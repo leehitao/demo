@@ -2,6 +2,7 @@ package com.xrt.bzj.service.rocketmq;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
+import org.apache.rocketmq.client.consumer.MessageSelector;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -47,7 +48,8 @@ public class RocketMQConsumer {
         // 我们自己实现的监听类
         consumer.registerMessageListener(messageListen);
         try {
-            consumer.subscribe(topic,tag);
+            MessageSelector messageSelector = MessageSelector.bySql("18<= age and age <= 28");
+            consumer.subscribe(topic,messageSelector);
             log.info("================>消费者创建完成，ConsumerGroupName{}<================",groupName);
             log.info("============>消费者监听开始,groupName:{},topic:{}<============",groupName,topic);
         } catch (MQClientException e) {

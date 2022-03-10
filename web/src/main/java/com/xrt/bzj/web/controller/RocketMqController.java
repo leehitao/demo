@@ -32,10 +32,13 @@ public class RocketMqController {
         DefaultMQProducer producer = rocketMQProducer.getRocketMQProducer();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String body = "hi RocketMQ, now is  " + sdf.format(new Date()) + ".";
-        Message message = new Message("topic2020", "test", body.getBytes());
         try {
-            producer.send(message);
+            for (int i = 0; i < 35; i++) {
+                String body = "hi RocketMQ" + i + ", now is  " + sdf.format(new Date());
+                Message message = new Message("topic2020", "test", body.getBytes());
+                message.putUserProperty("age", String.valueOf(i));
+                producer.send(message);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
