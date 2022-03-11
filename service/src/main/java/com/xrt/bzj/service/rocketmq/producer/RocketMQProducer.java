@@ -1,7 +1,8 @@
-package com.xrt.bzj.service.rocketmq;
+package com.xrt.bzj.service.rocketmq.producer;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.rocketmq.client.producer.DefaultMQProducer;
+import org.apache.rocketmq.client.producer.TransactionMQProducer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,14 +29,18 @@ public class RocketMQProducer {
     @Value("${rocketmq.producer.sendMsgTimeout}")
     private int sendMsgTimeout;
 
+    @Autowired
+    private ProductListen productListen;
+
     @Bean(initMethod = "start", destroyMethod = "shutdown")
-    public DefaultMQProducer getRocketMQProducer() {
-        DefaultMQProducer producer = new DefaultMQProducer(groupName);
+    public TransactionMQProducer getRocketMQProducer() {
+        TransactionMQProducer producer = new TransactionMQProducer(groupName);
         producer.setNamesrvAddr(nameserAddr);
         producer.setInstanceName(instanceName);
         producer.setMaxMessageSize(maxMessageSize);
         producer.setSendMsgTimeout(sendMsgTimeout);
         producer.setVipChannelEnabled(false);
+        producer.setTransactionListener(productListen);
         log.info("================>生产者创建完成，ProducerGroupName{}<================", groupName);
         return producer;
     }

@@ -1,8 +1,8 @@
-package com.xrt.bzj.service.rocketmq;
+package com.xrt.bzj.service.rocketmq.consumer;
 
 import org.apache.rocketmq.common.message.MessageExt;
 
-public interface MessageProcessor {
+public interface PointProcessor {
 
     boolean handle(MessageExt messageExt);
 

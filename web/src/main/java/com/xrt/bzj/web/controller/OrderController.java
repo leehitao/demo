@@ -1,21 +1,23 @@
 package com.xrt.bzj.web.controller;
 
 
+import com.alibaba.fastjson.JSON;
 import com.xrt.bzj.dao.entity.Order;
 import com.xrt.bzj.dao.param.OrderPageParam;
 import com.xrt.bzj.service.OrderService;
-import lombok.extern.slf4j.Slf4j;
-
-import io.geekidea.springbootplus.generator.common.controller.BaseController;
+import com.xrt.bzj.service.rocketmq.producer.RocketMQProducer;
 import io.geekidea.springbootplus.generator.common.api.ApiResult;
+import io.geekidea.springbootplus.generator.common.controller.BaseController;
 import io.geekidea.springbootplus.generator.core.pagination.Paging;
-
 import io.geekidea.springbootplus.generator.core.validator.groups.Add;
 import io.geekidea.springbootplus.generator.core.validator.groups.Update;
-import org.springframework.validation.annotation.Validated;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.rocketmq.client.producer.TransactionMQProducer;
+import org.apache.rocketmq.common.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -33,6 +35,9 @@ public class OrderController extends BaseController {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    RocketMQProducer rocketMQProducer;
+
     /**
      * 添加
      */
@@ -43,6 +48,21 @@ public class OrderController extends BaseController {
         boolean flag = orderService.saveOrder(order);
         return ApiResult.result(flag);
     }
+
+
+    /**
+     * 添加
+     */
+    @PostMapping("/createOrder")
+    @ApiOperation(value = "创建订单那", response = ApiResult.class)
+    public ApiResult<Boolean> createOrder(@Validated(Add.class) @RequestBody Order order) throws Exception {
+        TransactionMQProducer rocketMQProducer = this.rocketMQProducer.getRocketMQProducer();
+        Message message = new Message("topic2020", JSON.toJSONString(order).getBytes());
+        message.putUserProperty("age", "20");
+        rocketMQProducer.sendMessageInTransaction(message, null);
+        return ApiResult.result(true);
+    }
+
 
     /**
      * 修改
@@ -83,6 +103,7 @@ public class OrderController extends BaseController {
         Paging<Order> paging = orderService.getOrderPageList(orderPageParam);
         return ApiResult.ok(paging);
     }
+
 
 }
 

@@ -1,4 +1,4 @@
-package com.xrt.bzj.service.rocketmq;
+package com.xrt.bzj.service.rocketmq.consumer;
 
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
@@ -13,15 +13,15 @@ import java.util.List;
  * Description：监听类
  */
 @Component
-public class MessageListen implements MessageListenerConcurrently {
+public class ConsumerListen implements MessageListenerConcurrently {
 
     @Autowired
-    private MessageProcessor messageProcessor;
+    private PointProcessor pointProcessor;
 
     @Override
     public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> list, ConsumeConcurrentlyContext consumeConcurrentlyContext) {
         MessageExt ext = list.get(0);
-        boolean result = messageProcessor.handle(ext);
+        boolean result = pointProcessor.handle(ext);
         if (!result) {
             return ConsumeConcurrentlyStatus.RECONSUME_LATER;
         }

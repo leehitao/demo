@@ -1,4 +1,4 @@
-package com.xrt.bzj.service.rocketmq;
+package com.xrt.bzj.service.rocketmq.consumer;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
 public class RocketMQConsumer {
 
     @Autowired
-    private MessageListen messageListen;
+    private ConsumerListen messageListen;
 
     @Value("${rocketmq.consumer.namesrvAddr}")
     private String namesrvAddr;
@@ -47,6 +47,7 @@ public class RocketMQConsumer {
         consumer.setVipChannelEnabled(false);
         // 我们自己实现的监听类
         consumer.registerMessageListener(messageListen);
+        consumer.setMaxReconsumeTimes(3);
         try {
             MessageSelector messageSelector = MessageSelector.bySql("18<= age and age <= 28");
             consumer.subscribe(topic,messageSelector);

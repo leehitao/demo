@@ -1,6 +1,6 @@
 package com.xrt.bzj.web.controller;
 
-import com.xrt.bzj.service.rocketmq.RocketMQProducer;
+import com.xrt.bzj.service.rocketmq.producer.RocketMQProducer;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;

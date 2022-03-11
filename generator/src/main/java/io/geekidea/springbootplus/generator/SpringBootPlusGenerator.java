@@ -53,7 +53,7 @@ public class SpringBootPlusGenerator {
                 .setFileOverride(true);
 
         // 设置表信息
-        generatorProperties.addTable("t_product", "id");
+        generatorProperties.addTable("t_point", "id");
         // 设置表前缀
         generatorProperties.setTablePrefix(Arrays.asList("t_"));
 
