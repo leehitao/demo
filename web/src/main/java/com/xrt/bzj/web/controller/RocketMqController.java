@@ -1,6 +1,5 @@
 package com.xrt.bzj.web.controller;
 
-import com.xrt.bzj.service.rocketmq.producer.RocketMQProducer;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
@@ -24,19 +23,19 @@ import java.util.Date;
 public class RocketMqController {
 
     @Autowired
-    @Qualifier("rocketMQProducer")
-    RocketMQProducer rocketMQProducer;
+    @Qualifier("DefaultMQProducer")
+    DefaultMQProducer producer;
 
     @GetMapping("/test")
     public void TestSend() {
-        DefaultMQProducer producer = rocketMQProducer.getRocketMQProducer();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             for (int i = 0; i < 35; i++) {
                 String body = "hi RocketMQ" + i + ", now is  " + sdf.format(new Date());
-                Message message = new Message("topic2020", "test", body.getBytes());
+                Message message = new Message("topic2020", "simple", body.getBytes());
                 message.putUserProperty("age", String.valueOf(i));
+                message.setDelayTimeLevel(3);
                 producer.send(message);
             }
         } catch (Exception e) {

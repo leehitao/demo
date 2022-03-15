@@ -1,6 +1,5 @@
 package com.xrt.bzj.service.rabbitmq;
 
-import com.xrt.bzj.service.RabbitmqService;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

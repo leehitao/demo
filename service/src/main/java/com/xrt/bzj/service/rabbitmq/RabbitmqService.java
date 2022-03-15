@@ -1,4 +1,4 @@
-package com.xrt.bzj.service;
+package com.xrt.bzj.service.rabbitmq;
 
 /**
  * @author Lee

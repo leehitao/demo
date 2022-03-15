@@ -5,7 +5,6 @@ import com.alibaba.fastjson.JSON;
 import com.xrt.bzj.dao.entity.Order;
 import com.xrt.bzj.dao.param.OrderPageParam;
 import com.xrt.bzj.service.OrderService;
-import com.xrt.bzj.service.rocketmq.producer.RocketMQProducer;
 import io.geekidea.springbootplus.generator.common.api.ApiResult;
 import io.geekidea.springbootplus.generator.common.controller.BaseController;
 import io.geekidea.springbootplus.generator.core.pagination.Paging;
@@ -17,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.producer.TransactionMQProducer;
 import org.apache.rocketmq.common.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,8 +35,10 @@ public class OrderController extends BaseController {
     @Autowired
     private OrderService orderService;
 
+
     @Autowired
-    RocketMQProducer rocketMQProducer;
+    @Qualifier("TransactionMQProducer")
+    TransactionMQProducer producer;
 
     /**
      * 添加
@@ -51,15 +53,15 @@ public class OrderController extends BaseController {
 
 
     /**
-     * 添加
+     * 模拟创建订单
      */
     @PostMapping("/createOrder")
-    @ApiOperation(value = "创建订单那", response = ApiResult.class)
+    @ApiOperation(value = "创建订单", response = ApiResult.class)
     public ApiResult<Boolean> createOrder(@Validated(Add.class) @RequestBody Order order) throws Exception {
-        TransactionMQProducer rocketMQProducer = this.rocketMQProducer.getRocketMQProducer();
-        Message message = new Message("topic2020", JSON.toJSONString(order).getBytes());
+        Message message = new Message("topic2020", "order", JSON.toJSONString(order).getBytes());
         message.putUserProperty("age", "20");
-        rocketMQProducer.sendMessageInTransaction(message, null);
+//        message.setDelayTimeLevel(3);  事务消息不支持延时
+        producer.sendMessageInTransaction(message, null);
         return ApiResult.result(true);
     }
 

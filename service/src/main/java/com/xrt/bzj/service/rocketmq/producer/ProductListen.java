@@ -1,6 +1,7 @@
 package com.xrt.bzj.service.rocketmq.producer;
 
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.xrt.bzj.dao.entity.Order;
 import com.xrt.bzj.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
@@ -10,8 +11,6 @@ import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.Date;
 
 /**
  * @Author: lee
@@ -44,8 +43,19 @@ public class ProductListen implements TransactionListener {
 
 	@Override
 	public LocalTransactionState checkLocalTransaction(MessageExt messageExt) {
-		log.info("回调检测本地事务,时间：" + new Date().getTime());
-
-		return null;
+		log.info("本地事务回调: ");
+		String body = new String(messageExt.getBody());
+		Order orderParam = JSONObject.parseObject(body, Order.class);
+		String orderNo = orderParam.getOrderNo();
+		log.info("orderNo: " + orderNo);
+		LambdaQueryWrapper<Order> wrapper = new LambdaQueryWrapper<>();
+		wrapper.eq(Order::getOrderNo, orderNo);
+		Order order = orderService.getOne(wrapper);
+		if (order == null) {
+			log.info("回调检测结果: " + "fail");
+			return LocalTransactionState.ROLLBACK_MESSAGE;
+		}
+		log.info("回调检测结果: " + "success");
+		return LocalTransactionState.COMMIT_MESSAGE;
 	}
 }
