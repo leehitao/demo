@@ -1,10 +1,9 @@
 package com.xrt.bzj.web.config;
 
 import org.springframework.amqp.core.Queue;
-import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
 
-@SpringBootConfiguration
+//@SpringBootConfiguration
 public class RabbitmqConfig {
 
     // 配置一个工作模型队列

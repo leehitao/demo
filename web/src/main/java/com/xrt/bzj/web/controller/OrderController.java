@@ -16,7 +16,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.producer.TransactionMQProducer;
 import org.apache.rocketmq.common.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,8 +35,8 @@ public class OrderController extends BaseController {
     private OrderService orderService;
 
 
-    @Autowired
-    @Qualifier("TransactionMQProducer")
+    //    @Autowired
+//    @Qualifier("TransactionMQProducer")
     TransactionMQProducer producer;
 
     /**

@@ -7,12 +7,11 @@ import org.apache.rocketmq.client.exception.MQClientException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * Description：消费者配置
  */
-@Configuration
+//@Configuration
 @Slf4j
 public class RocketMQConsumer {
 

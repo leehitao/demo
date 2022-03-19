@@ -30,6 +30,7 @@ public class PointProcessorImpl implements PointProcessor {
             Order order = JSONObject.parseObject(result, Order.class);
             Point point = new Point();
             point.setOrderNo(order.getOrderNo());
+            System.out.println(1 / 0);
             point.setPoint(10);
             pointService.save(point);
             log.info("完成积分计算");

@@ -3,10 +3,9 @@ package com.xrt.bzj.service.rabbitmq;
 import com.rabbitmq.client.Channel;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.stereotype.Component;
 
 // 2个消费者
-@Component
+//@Component
 public class RabbitmqReceiveListener {
 
     private static int count = 0;

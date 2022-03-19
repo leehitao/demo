@@ -33,7 +33,7 @@ public class ProductListen implements TransactionListener {
 			Order order = JSONObject.parseObject(body, Order.class);
 			orderService.saveOrder(order);
 			log.info("完成订单本地事务");
-			state = LocalTransactionState.COMMIT_MESSAGE;
+			state = LocalTransactionState.UNKNOW;
 		} catch (Exception e) {
 			e.printStackTrace();
 			state = LocalTransactionState.ROLLBACK_MESSAGE;
