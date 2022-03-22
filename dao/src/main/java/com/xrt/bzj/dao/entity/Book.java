@@ -13,6 +13,7 @@ import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * @author lee
@@ -38,5 +39,11 @@ public class Book extends BaseEntity {
 
     @ApiModelProperty("价格")
     private BigDecimal price;
+
+    @ApiModelProperty("创建时间")
+    private Date createTime;
+
+    @ApiModelProperty("修改时间")
+    private Date updateTime;
 
 }
