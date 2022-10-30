@@ -11,4 +11,8 @@ import com.xrt.bzj.dao.entity.Order;
  */
 public interface RabbitmqService {
     void publish(Order order);
+
+    void publishWishPros(Order order);
+
+    void publishWishConfirms(Order order);
 }

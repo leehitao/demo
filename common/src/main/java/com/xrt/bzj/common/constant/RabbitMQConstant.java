@@ -12,4 +12,6 @@ public class RabbitMQConstant {
     public static final String ROUTING_KEY = "order.sync";
     public static final String ORDER_SYNC_QUEUE = "order_sync";
     public static final String PRODUCT_SYNC_QUEUE = "order_sync";
+    public static final String ROUTING_KEY1 = "order.sync.test";
+
 }

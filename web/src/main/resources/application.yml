@@ -1,0 +1,24 @@
+###rabbitmq配置信息###
+# ip
+spring:
+  rabbitmq:
+    host: 120.77.202.213
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host:
+    listener:
+      direct:
+        acknowledge-mode: auto
+      simple:
+        retry:
+          enabled: true
+          max-attempts: 3
+          initial-interval: 3000
+        acknowledge-mode: manual #开启手动ACK
+        prefetch: 10
+    publisher-confirm-type: correlated  #确认消息到达交换机
+    publisher-returns: true #确认消息到达队列
+
+
+

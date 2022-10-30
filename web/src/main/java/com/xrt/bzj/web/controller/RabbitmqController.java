@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/rabbitMQ")
@@ -17,7 +18,24 @@ public class RabbitmqController {
     private RabbitmqService rabbitmqService;
 
     @PostMapping("simple")
-    public void publish(@RequestBody Order order) {
+    @ResponseBody
+    public String publish(@RequestBody Order order) {
         rabbitmqService.publish(order);
+        return "success";
+    }
+
+    @PostMapping("publishWithProps")
+    @ResponseBody
+    public String publishWithProps(@RequestBody Order order) {
+        rabbitmqService.publishWishPros(order);
+        return "success";
+    }
+
+
+    @PostMapping("publishWishConfirms")
+    @ResponseBody
+    public String publishWishConfirms(@RequestBody Order order) {
+        rabbitmqService.publishWishConfirms(order);
+        return "success";
     }
 }
