@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * @author Lee
@@ -46,5 +47,15 @@ public class FileDownloadController {
 
     }
 
+    @RequestMapping("zipDownload")
+    @ApiOperation(value = "压缩下载")
+    public void down(HttpServletResponse response) {
+        try {
+            fileDownloadService.zipDownload(response);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 }

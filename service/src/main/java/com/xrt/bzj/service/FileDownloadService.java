@@ -1,6 +1,7 @@
 package com.xrt.bzj.service;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * @author Lee
@@ -17,4 +18,5 @@ public interface FileDownloadService {
 
     void downloadUserInfoMixByExcutor(HttpServletResponse response);
 
+    void zipDownload(HttpServletResponse response) throws IOException;
 }

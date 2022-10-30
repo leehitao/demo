@@ -1,17 +1,18 @@
 package com.xrt.bzj.dao.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.geekidea.springbootplus.generator.common.entity.BaseEntity;
+import io.geekidea.springbootplus.generator.core.validator.groups.Update;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
 import javax.validation.constraints.NotNull;
-import io.geekidea.springbootplus.generator.core.validator.groups.Update;
+import java.util.Date;
 
 /**
  * 
@@ -40,5 +41,6 @@ public class Order extends BaseEntity {
 
     @ApiModelProperty("创建时间")
     private Date createTime;
+
 
 }

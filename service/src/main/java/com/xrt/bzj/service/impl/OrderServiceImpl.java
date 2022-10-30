@@ -14,6 +14,7 @@ import io.geekidea.springbootplus.generator.core.pagination.PageInfo;
 import io.geekidea.springbootplus.generator.core.pagination.Paging;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +30,9 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderMapper, Order> implem
 
     @Autowired
     private OrderMapper orderMapper;
+
+    @Autowired
+    RedisTemplate redisTemplate;
 
     @Transactional(rollbackFor = Exception.class)
     @Override
