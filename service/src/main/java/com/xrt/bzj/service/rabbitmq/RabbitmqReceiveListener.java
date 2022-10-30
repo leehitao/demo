@@ -15,8 +15,8 @@ public class RabbitmqReceiveListener {
 
 
     @RabbitListener(queues = RabbitMQConstant.ORDER_SYNC_QUEUE)
-    public void consume1(Order msg, Channel channel, Message message) throws IOException {
-        System.out.println("队列1接收到消息：" + msg.toString());
+    public void consume1(Order order, Channel channel, Message message) throws IOException {
+        System.out.println("订单队列收到消息：" + order.toString());
         String correlationId = message.getMessageProperties().getCorrelationId();
         System.out.println("唯一标识：" + correlationId);
         channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
@@ -24,9 +24,9 @@ public class RabbitmqReceiveListener {
 
     }
 
-    @RabbitListener(queues = RabbitMQConstant.ORDER_SYNC_QUEUE)
-    public void consume2(Order msg, Channel channel, Message message) throws IOException {
-        System.out.println("队列2接收到消息：" + msg.toString());
+    @RabbitListener(queues = RabbitMQConstant.PRODUCT_SYNC_QUEUE)
+    public void consume2(Order order, Channel channel, Message message) throws IOException {
+        System.out.println("生产队列收到消息：" + order.toString());
         String correlationId = message.getMessageProperties().getCorrelationId();
         System.out.println("唯一标识：" + correlationId);
         channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);

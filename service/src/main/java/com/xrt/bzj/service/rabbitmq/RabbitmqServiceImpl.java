@@ -6,9 +6,10 @@ import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessagePostProcessor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.rabbit.support.CorrelationData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 /**
  * @author Lee
@@ -25,17 +26,16 @@ public class RabbitmqServiceImpl implements RabbitmqService {
 
     @Override
     public void publish(Order order) {
-        rabbitTemplate.convertAndSend(RabbitMQConstant.EXCAHNGE, RabbitMQConstant.ROUTING_KEY, order);
+        rabbitTemplate.convertAndSend(RabbitMQConstant.EXCAHNGE, RabbitMQConstant.ORDER_SYNC_ROUTING_KEY, order);
     }
-
 
     @Override
     public void publishWishPros(Order order) {
 
-        rabbitTemplate.convertAndSend(RabbitMQConstant.EXCAHNGE, RabbitMQConstant.ROUTING_KEY, order, new MessagePostProcessor() {
+        rabbitTemplate.convertAndSend(RabbitMQConstant.EXCAHNGE, RabbitMQConstant.PRODUCT_SYNC_ROUTING_KEY, order, new MessagePostProcessor() {
             @Override
             public Message postProcessMessage(Message message) throws AmqpException {
-                message.getMessageProperties().setCorrelationId("445322888");
+                message.getMessageProperties().setCorrelationId(UUID.randomUUID().toString().replace("-", ""));
                 return message;
             }
         });
@@ -43,27 +43,11 @@ public class RabbitmqServiceImpl implements RabbitmqService {
 
     @Override
     public void publishWishConfirms(Order order) {
-        rabbitTemplate. (new RabbitTemplate.ConfirmCallback() {
-            @Override
-            public void confirm(CorrelationData correlationData, boolean ack, String cause) {
-                if (ack) {
-                    System.out.println("消息到达交换机");
-                } else {
-                    System.out.println("消息没有到达交换机, 需要补偿操作");
-                }
-            }
-        });
-        rabbitTemplate.setReturnCallback(new RabbitTemplate.ReturnCallback() {
-            @Override
-            public void returnedMessage(Message message, int i, String s, String s1, String s2) {
-                System.out.println("消息路由队列失败，做补救操作");
-            }
-        });
 
-        rabbitTemplate.convertAndSend(RabbitMQConstant.EXCAHNGE, RabbitMQConstant.ROUTING_KEY, order, new MessagePostProcessor() {
+        rabbitTemplate.convertAndSend(RabbitMQConstant.EXCAHNGE, RabbitMQConstant.ORDER_SYNC_ROUTING_KEY, order, new MessagePostProcessor() {
             @Override
             public Message postProcessMessage(Message message) throws AmqpException {
-                message.getMessageProperties().setCorrelationId("445322888");
+                message.getMessageProperties().setCorrelationId(UUID.randomUUID().toString().replace("-", ""));
                 return message;
             }
         });
